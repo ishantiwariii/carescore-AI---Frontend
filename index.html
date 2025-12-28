@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CareScore AI | Dashboard</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="brand">CareScore<span>AI</span></div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li class="active"><a href="index.html">Dashboard</a></li>
+          <li><a href="history.html">All Reports</a></li>
+          <li><a href="imp.html">Important Reports</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="profile.html">Profile Setup</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <span
+          id="navUsername"
+          class="nav-username"
+          style="display: none"
+        ></span>
+        <a href="login.html" id="loginBtn" style="display: none">Login</a>
+        <button id="logoutBtn" class="logout" style="display: none">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- GREETING -->
+      <section class="greeting">
+        <h1>Hello, <span id="greetName">User</span> 👋</h1>
+        <p>Your personal wellness overview at a glance</p>
+      </section>
+
+      <section class="analyze-card">
+        <div class="analyze-text">
+          <h2>Analyze a Health Report</h2>
+          <p>
+            Upload your lab report and get calm, AI-powered wellness insights.
+          </p>
+          <button onclick="location.href='upload.html'">Analyze Report</button>
+        </div>
+
+        <div class="analyze-visual">
+          <img src="images/analysis_hero.png" alt="Doctor analyzing report" />
+        </div>
+      </section>
+
+      <section class="yt-section">
+        <div class="section-header">
+          <h2>Health Knowledge Hub</h2>
+          <p>
+            Curated videos to help you understand reports, tests, and wellness
+            trends.
+          </p>
+        </div>
+
+        <div class="yt-grid">
+          <div class="yt-card">
+            <div class="yt-frame">
+              <iframe
+                src="https://www.youtube.com/embed/mNRJF-TrleU?si=-EsVihoqYLXSDfig"
+                title="YouTube video"
+                frameborder="0"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            <h4>How to Read a Blood Test Report</h4>
+            <p>Understand common blood parameters in simple terms.</p>
+          </div>
+
+          <div class="yt-card">
+            <div class="yt-frame">
+              <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID_2"
+                title="YouTube video"
+                frameborder="0"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            <h4>What is a CareScore?</h4>
+            <p>Learn how CareScore summarizes your wellness status.</p>
+          </div>
+
+          <div class="yt-card">
+            <div class="yt-frame">
+              <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID_3"
+                title="YouTube video"
+                frameborder="0"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            <h4>Tracking Health Over Time</h4>
+            <p>Why trends matter more than single test results.</p>
+          </div>
+        </div>
+
+        <a href="#" class="yt-link">View more videos →</a>
+      </section>
+
+      <section class="dashboard-grid">
+        <!-- STATS -->
+        <div class="stats">
+          <h3>Health Summary</h3>
+
+          <div class="stats-grid">
+            <div class="stat-card good">
+              <div class="icon">📄</div>
+              <div>
+                <span>Total Reports</span>
+                <h2>24</h2>
+              </div>
+            </div>
+
+            <div class="stat-card good">
+              <div class="icon">💙</div>
+              <div>
+                <span>Latest CareScore</span>
+                <h2>78</h2>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="icon">📆</div>
+              <div>
+                <span>Tracking Days</span>
+                <h2>230</h2>
+              </div>
+            </div>
+
+            <div class="stat-card improve">
+              <div class="icon">📈</div>
+              <div>
+                <span>Improvements</span>
+                <h2>+3</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity">
+          <h3>Recent Activity</h3>
+
+          <ul class="activity-list">
+            <li class="activity-item good">
+              <span class="dot"></span>
+              <div class="activity-info">
+                <strong>Blood Test</strong>
+                <small>CareScore 78 • 2 days ago</small>
+              </div>
+              <span class="badge good">Good</span>
+            </li>
+
+            <li class="activity-item improve">
+              <span class="dot"></span>
+              <div class="activity-info">
+                <strong>Vitamin Panel</strong>
+                <small>CareScore 82 • 5 days ago</small>
+              </div>
+              <span class="badge improve">Improving</span>
+            </li>
+
+            <li class="activity-item neutral">
+              <span class="dot"></span>
+              <div class="activity-info">
+                <strong>Lipid Profile</strong>
+                <small>CareScore 74 • 8 days ago</small>
+              </div>
+              <span class="badge neutral">Stable</span>
+            </li>
+          </ul>
+
+          <a class="view-all" href="history.html">View all reports →</a>
+        </div>
+      </section>
+
+      <section class="faq">
+        <h3>FAQs</h3>
+
+        <details>
+          <summary>Is CareScore medical advice?</summary>
+          <p>No. It provides educational wellness insights only.</p>
+        </details>
+
+        <details>
+          <summary>Can I delete my reports?</summary>
+          <p>Yes, reports can be removed anytime.</p>
+        </details>
+
+        <details>
+          <summary>Is my data secure?</summary>
+          <p>Yes, privacy and data safety are top priorities.</p>
+        </details>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-grid">
+          <div>
+            <h4>CareScore AI</h4>
+            <p>Turning lab reports into calm, clear wellness insights.</p>
+          </div>
+          <div>
+            <h4>Service</h4>
+            <p>Get Started</p>
+            <p>All Reports</p>
+          </div>
+          <div>
+            <h4>Resources</h4>
+            <p>Privacy Policy</p>
+            <p>Terms of Use</p>
+          </div>
+          <div>
+            <h4>About</h4>
+            <p>Our Story</p>
+            <p>Contact</p>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          Educational wellness insights only. Not medical advice.
+        </p>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth_guard.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

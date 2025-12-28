@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareScoreAI | Login</title>
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-left">
+        <div class="brand">CareScore<span>AI</span></div>
+
+        <h1 id="form-title">Welcome Back</h1>
+        <p class="subtitle">
+          Sign in to access your wellness scores, reports, and insights.
+        </p>
+
+        <div
+          id="auth-message"
+          class="auth-message"
+          style="display: none; color: red; margin-bottom: 10px"
+        ></div>
+
+        <form class="login-form" id="loginForm">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            required
+          />
+
+          <div id="password-section">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" />
+
+            <div class="form-row">
+              <a href="#" class="forgot">Forgot password?</a>
+            </div>
+
+            <button type="submit" id="login-btn">Log In</button>
+          </div>
+
+          <div id="otp-section" style="display: none">
+            <button type="button" id="send-otp-btn" class="secondary-btn">
+              Send Login Code
+            </button>
+
+            <div id="otp-verify-group" style="display: none; margin-top: 15px">
+              <label for="otp-input">Enter 6-Digit Code</label>
+              <input
+                type="text"
+                id="otp-input"
+                placeholder="123456"
+                maxlength="6"
+              />
+              <button
+                type="button"
+                id="verify-otp-btn"
+                style="margin-top: 10px"
+              >
+                Verify & Login
+              </button>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 20px">
+            <a href="#" id="toggle-auth-mode"
+              >Or login with One-Time Code (OTP)</a
+            >
+          </div>
+
+          <div class="divider">Or login with</div>
+
+          <div class="social-login">
+            <button type="button" class="social google">Google</button>
+            <button type="button" class="social apple">Apple</button>
+          </div>
+
+          <p class="register">
+            Don’t have an account?
+            <a href="register.html">Register now</a>
+          </p>
+        </form>
+
+        <footer>© 2025 CareScore AI · Wellness insights only</footer>
+      </div>
+
+      <div class="login-right">
+        <div class="right-content">
+          <h2>Understand your health,<br />clearly and calmly</h2>
+          <p>
+            CareScore AI transforms lab data into easy-to-understand wellness
+            insights.
+          </p>
+          <img
+            src="Images/Healthcare-dashboard.webp"
+            class="dashboard-img"
+            alt="CareScore Dashboard Preview"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

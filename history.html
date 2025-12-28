@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Report History | CareScore AI</title>
+    <link rel="stylesheet" href="css/history.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="brand">CareScore<span>AI</span></div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li class="active"><a href="index.html">Dashboard</a></li>
+          <li><a href="history.html">All Reports</a></li>
+          <li><a href="imp.html">Important Reports</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="profile.html">Profile Setup</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <span
+          id="navUsername"
+          class="nav-username"
+          style="display: none"
+        ></span>
+        <a href="login.html" id="loginBtn" style="display: none">Login</a>
+        <button id="logoutBtn" class="logout" style="display: none">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="page-header">
+        <h1>Report History</h1>
+        <p>View, filter, and manage your analyzed reports.</p>
+      </section>
+
+      <section class="controls">
+        <input type="text" id="searchInput" placeholder="Search reports..." />
+
+        <select id="filterSelect">
+          <option value="all">All Types</option>
+          <option value="blood">Blood</option>
+          <option value="vitamin">Vitamin</option>
+          <option value="lipid">Lipid</option>
+        </select>
+      </section>
+
+      <section id="reportList" class="report-list"></section>
+
+      <div class="pagination">
+        <button id="prevBtn">Prev</button>
+        <span id="pageInfo"></span>
+        <button id="nextBtn">Next</button>
+      </div>
+    </main>
+
+    <script src="js/auth-guard.js"></script>
+    <script src="js/history.js"></script>
+  </body>
+</html>

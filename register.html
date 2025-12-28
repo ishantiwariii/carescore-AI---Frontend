@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareScoreAI | Register</title>
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-left">
+        <div class="brand">CareScore<span>AI</span></div>
+
+        <h1>Create an Account</h1>
+        <p class="subtitle">
+          Join CareScore AI to start understanding your health with clarity.
+        </p>
+
+        <div
+          id="register-message"
+          class="auth-message"
+          style="display: none; margin-bottom: 10px"
+        ></div>
+
+        <form class="login-form" id="registerForm">
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" placeholder="Your name" required />
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            required
+          />
+
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            required
+          />
+
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="••••••••"
+            required
+          />
+
+          <button type="submit" id="register-btn">Register</button>
+
+          <div class="divider">Or register with</div>
+
+          <div class="social-login">
+            <button type="button" class="social google">Google</button>
+            <button type="button" class="social apple">Apple</button>
+          </div>
+
+          <p class="register">
+            Already have an account?
+            <a href="login.html">Sign in</a>
+          </p>
+        </form>
+
+        <footer>© 2025 CareScore AI · Wellness insights only</footer>
+      </div>
+
+      <div class="login-right">
+        <div class="right-content">
+          <h2>Effortlessly track<br />your wellness journey</h2>
+          <p>
+            Securely store reports, view trends, and get wellness insights — all
+            in one place.
+          </p>
+          <img
+            src="Images/Healthcare-dashboard.webp"
+            class="dashboard-img"
+            alt="CareScore Dashboard Preview"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+  </body>
+</html>

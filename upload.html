@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Document | CareScore AI</title>
+    <link rel="stylesheet" href="css/upload.css" />
+  </head>
+
+  <body>
+    <input
+      type="file"
+      id="fileInput"
+      accept=".jpg,.jpeg,.png,.pdf"
+      style="display: none"
+    />
+
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="brand">CareScore<span>AI</span></div>
+        <ul class="nav-menu">
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="history.html">All Reports</a></li>
+          <li><a href="imp.html">Important Reports</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </header>
+
+    <div class="upload-container">
+      <section class="upload-intro">
+        <h1>Let’s upload your document</h1>
+        <p>Add your lab report to get AI-powered wellness insights.</p>
+        
+        <div id="statusMessage" class="status-message" style="display: none;"></div>
+      </section>
+
+      <section class="upload-options">
+        <div class="upload-card" id="deviceUploadCard">
+          <div class="icon">📁</div>
+          <h4>Upload from device</h4>
+          <p>PDF, JPG or PNG files supported</p>
+          <button class="btn-primary" id="chooseFileBtn">Choose File</button>
+        </div>
+
+        <div class="upload-card" id="cameraUploadCard">
+          <div class="icon">📷</div>
+          <h4>Use camera</h4>
+          <p>Capture your report clearly</p>
+          <button class="btn-outline" id="cameraBtn">Open Camera</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+      <div class="spinner"></div>
+      <h3>Analyzing Report...</h3>
+      <p>Our AI is extracting your health data. This may take a moment.</p>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <h4>CareScore AI</h4>
+          <p>Turning lab reports into calm, clear wellness insights.</p>
+        </div>
+        <div>
+          <h4>Service</h4>
+          <p>Get Started</p>
+          <p>All Reports</p>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <p>Privacy Policy</p>
+          <p>Terms of Use</p>
+        </div>
+        <div>
+          <h4>About</h4>
+          <p>Our Story</p>
+          <p>Contact</p>
+        </div>
+      </div>
+      <p class="disclaimer">
+        Educational wellness insights only. Not medical advice.
+      </p>
+    </footer>
+
+    <script src="js/upload.js"></script>
+  </body>
+</html>

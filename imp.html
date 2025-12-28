@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Important Reports | CareScore AI</title>
+    <link rel="stylesheet" href="css/imp.css" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="brand">CareScore<span>AI</span></div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li class="active"><a href="index.html">Dashboard</a></li>
+          <li><a href="history.html">All Reports</a></li>
+          <li><a href="imp.html">Important Reports</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="profile.html">Profile Setup</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <span
+          id="navUsername"
+          class="nav-username"
+          style="display: none"
+        ></span>
+        <a href="login.html" id="loginBtn" style="display: none">Login</a>
+        <button id="logoutBtn" class="logout" style="display: none">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- HEADER -->
+      <section class="page-header">
+        <h1>Important Reports</h1>
+        <p>Your saved and critical health reports for quick access.</p>
+      </section>
+
+      <div id="emptyState" class="empty-state hidden">
+        ⭐ No important reports yet.
+        <br />Save reports from the history page.
+      </div>
+
+      <section id="importantList" class="report-list"></section>
+    </main>
+
+    <script src="js/auth-guard.js"></script>
+    <script src="js/imp.js"></script>
+  </body>
+</html>

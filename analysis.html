@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Report | CareScore AI</title>
+    <link rel="stylesheet" href="css/analysis.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="brand">CareScore<span>AI</span></div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="history.html">All Reports</a></li>
+            <li><a href="imp.html">Important Reports</a></li>
+        </ul>
+      </div>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </header>
+
+    <main class="main-container">
+      
+      <div class="top-grid">
+        
+        <div class="card score-card">
+            <h3>Your Health Score</h3>
+            <div class="score-circle-container">
+                <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="circle" id="scoreCircle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <text x="18" y="20.35" class="percentage" id="scoreText">0</text>
+                </svg>
+            </div>
+            <p id="scoreLabel" class="score-label">Calculating...</p>
+        </div>
+
+        <div class="card insight-card">
+            <h3>🤖 AI Analysis</h3>
+            <div id="aiExplanation" class="ai-text">
+                <div class="skeleton-text"></div>
+                <div class="skeleton-text short"></div>
+                <div class="skeleton-text"></div>
+            </div>
+            <div class="tags" id="deviationTags">
+                </div>
+        </div>
+      </div>
+
+      <div class="details-grid">
+          
+          <div class="card graph-card">
+              <h3>Biomarker Overview</h3>
+              <canvas id="healthChart"></canvas>
+          </div>
+
+          <div class="card list-card">
+              <h3>Detailed Results</h3>
+              <ul id="metricsList" class="metrics-list">
+                  </ul>
+          </div>
+      </div>
+
+      <div class="action-bar">
+          <button id="downloadBtn" class="btn-primary">
+              <span class="icon">⬇</span> Download Full Report (PDF)
+          </button>
+          <a href="history.html" class="btn-text">Back to History</a>
+      </div>
+
+    </main>
+    <script src="js/auth_guard.js"></script>
+    <script src="js/analysis.js"></script>
+  </body>
+</html>

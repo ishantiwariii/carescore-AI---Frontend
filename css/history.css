@@ -1,0 +1,279 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* --- NAVBAR (Kept exactly as you had it) --- */
+.navbar {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.brand span {
+  color: #2563eb;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #0f172a;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+/* Fix: Targets the link inside the active list item */
+.nav-menu li.active a,
+.nav-menu li a:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.logout {
+  background: #fff;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.logout:hover {
+  background: #fef2f2;
+}
+
+/* --- MAIN LAYOUT --- */
+.main { padding: 40px; max-width: 1200px; margin: 0 auto; }
+
+.page-header h1 { font-size: 28px; margin-bottom: 8px; }
+.page-header p { color: #64748b; }
+
+/* --- CONTROLS (Search & Filter) --- */
+.controls {
+  display: flex;
+  gap: 16px;
+  margin: 30px 0;
+  padding: 16px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  align-items: center;
+}
+
+.controls input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  outline: none;
+}
+
+.controls input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.controls select {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* --- REPORT CARD STYLES (Matched to JS) --- */
+.report-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* The card container created by JS */
+.report-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-color: #cbd5e1;
+}
+
+/* Left side of card */
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.report-icon {
+  width: 50px;
+  height: 50px;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.report-info h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #1e293b;
+}
+
+.report-date {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* Right side of card */
+.card-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: right;
+}
+
+/* Status Badge (Analyzed vs Pending) */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.done { background: #dcfce7; color: #166534; }
+.status-badge.pending { background: #fef9c3; color: #854d0e; }
+
+/* Care Score Display */
+.care-score {
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* Score Colors */
+.score-good { color: #10b981; }    /* Green */
+.score-neutral { color: #f59e0b; } /* Orange */
+.score-bad { color: #ef4444; }     /* Red */
+
+
+/* --- LOADING & EMPTY STATES --- */
+.loading, .error, .empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+  background: white;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.error { color: #ef4444; background: #fef2f2; }
+
+/* --- PAGINATION --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pagination button:hover {
+  background: #f1f5f9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .report-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .card-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navbar {
+    padding: 16px;
+  }
+  
+  .nav-menu { display: none; } /* Mobile menu would need extra JS */
+}
