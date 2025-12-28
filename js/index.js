@@ -1,5 +1,5 @@
 // js/index.js
-const API_BASE_URL = "http://127.0.0.1:5000/api";
+const API_BASE_URL = "https://carescore-ai-backend.onrender.com/api";
 
 document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("user_id");
