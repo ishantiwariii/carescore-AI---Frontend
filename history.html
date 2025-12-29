@@ -5,6 +5,7 @@
     <title>Report History | CareScore AI</title>
     <link rel="stylesheet" href="css/history.css" />
   </head>
+
   <body>
     <header class="navbar">
       <div class="nav-left">
@@ -35,7 +36,7 @@
     <main class="main">
       <section class="page-header">
         <h1>Report History</h1>
-        <p>View, filter, and manage your analyzed reports.</p>
+        <p>View and download your analyzed reports.</p>
       </section>
 
       <section class="controls">
@@ -50,12 +51,6 @@
       </section>
 
       <section id="reportList" class="report-list"></section>
-
-      <div class="pagination">
-        <button id="prevBtn">Prev</button>
-        <span id="pageInfo"></span>
-        <button id="nextBtn">Next</button>
-      </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
