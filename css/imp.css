@@ -62,6 +62,18 @@ body {
   color: white;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
 .logout {
   background: #fff;
   color: #ef4444;
