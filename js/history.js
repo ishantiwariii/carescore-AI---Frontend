@@ -54,39 +54,55 @@ function renderReports(reports) {
 
   reports.forEach((report) => {
     const date = new Date(report.created_at).toLocaleDateString();
-    const score = report.analysis_data?.care_score || "N/A";
+    const score = report.analysis_data?.care_score ?? "N/A";
     const status = report.status;
 
     let scoreClass = "score-neutral";
-    if (score >= 80) scoreClass = "score-good";
-    else if (score < 50) scoreClass = "score-bad";
+    if (typeof score === "number") {
+      if (score >= 80) scoreClass = "score-good";
+      else if (score < 50) scoreClass = "score-bad";
+    }
 
     const card = document.createElement("div");
     card.className = "report-card";
-    card.onclick = () => (window.location.href = `report.html?id=${report.id}`);
 
     card.innerHTML = `
-            <div class="card-left">
-                <div class="report-icon">📄</div>
-                <div class="report-info">
-                    <h3>Medical Analysis Report</h3>
-                    <span class="report-date">${date}</span>
-                </div>
-            </div>
-            <div class="card-right">
-                <div class="status-badge ${
-                  status === "analyzed" ? "done" : "pending"
-                }">
-                    ${status.replace("_", " ")}
-                </div>
-                <div class="care-score ${scoreClass}">
-                    ${score} <span class="score-label">CareScore</span>
-                </div>
-            </div>
-        `;
+      <div class="card-left">
+        <div class="report-icon">📄</div>
+        <div class="report-info">
+          <h3>Medical Analysis Report</h3>
+          <span class="report-date">${date}</span>
+        </div>
+      </div>
+
+      <div class="card-right">
+        <div class="status-badge ${status === "analyzed" ? "done" : "pending"}">
+          ${status.replace("_", " ")}
+        </div>
+
+        <div class="care-score ${scoreClass}">
+          ${score} <span class="score-label">CareScore</span>
+        </div>
+
+        ${
+          status === "analyzed"
+            ? `<button class="download-btn">Download PDF</button>`
+            : `<span class="pdf-disabled">PDF not ready</span>`
+        }
+      </div>
+    `;
+
+    if (status === "analyzed") {
+      const btn = card.querySelector(".download-btn");
+      btn.addEventListener("click", () => downloadPDF(report.id));
+    }
 
     listContainer.appendChild(card);
   });
+}
+
+function downloadPDF(reportId) {
+  window.open(`${API_BASE_URL}/download/pdf/${reportId}`, "_blank");
 }
 
 function filterReports() {
@@ -95,7 +111,6 @@ function filterReports() {
 
   const filtered = allReports.filter((report) => {
     const date = new Date(report.created_at).toLocaleDateString().toLowerCase();
-
     const rawText = JSON.stringify(report.raw_data || "").toLowerCase();
 
     const matchesSearch = date.includes(query) || rawText.includes(query);
