@@ -1,4 +1,8 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: Inter, Arial, sans-serif;
@@ -6,7 +10,6 @@ body {
   color: #0f172a;
 }
 
-/* NAVBAR */
 .navbar {
   background: white;
   border-bottom: 1px solid #e2e8f0;
@@ -53,29 +56,31 @@ body {
   font-weight: 500;
 }
 
-/* Fix: Targets the link inside the active list item */
 .nav-menu li.active a,
 .nav-menu li a:hover {
   background: #2563eb;
   color: white;
 }
 
-
-
 .logout {
-  background: #020617;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
+  background: #fff;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
-/* MAIN */
+
+.logout:hover {
+  background: #fef2f2;
+}
+
 .main {
   padding: 40px;
 }
 
-/* HEADER */
 .page-header {
   margin-bottom: 30px;
 }
@@ -84,28 +89,25 @@ body {
   color: #64748b;
 }
 
-/* EMPTY STATE */
 .empty-state {
   background: white;
   padding: 30px;
   border-radius: 16px;
   text-align: center;
   color: #64748b;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 .hidden {
   display: none;
 }
 
-/* REPORT LIST */
 .report-list {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-/* REPORT ITEM */
 .report-item {
   background: white;
   padding: 12px;
@@ -114,10 +116,9 @@ body {
   grid-template-columns: 60px 1fr auto auto;
   gap: 12px;
   align-items: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
 }
 
-/* PREVIEW */
 .report-preview img {
   width: 50px;
   height: 70px;
@@ -126,7 +127,6 @@ body {
   border: 1px solid #e2e8f0;
 }
 
-/* INFO */
 .report-info h4 {
   font-size: 15px;
   margin-bottom: 2px;
@@ -137,7 +137,6 @@ body {
   color: #64748b;
 }
 
-/* BADGES */
 .badge {
   padding: 6px 12px;
   border-radius: 20px;
@@ -155,7 +154,6 @@ body {
   color: #075985;
 }
 
-/* ACTIONS */
 .report-actions {
   display: flex;
   gap: 8px;
