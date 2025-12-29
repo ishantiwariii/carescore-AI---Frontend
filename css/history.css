@@ -6,7 +6,6 @@ body {
   color: #0f172a;
 }
 
-/* --- NAVBAR (Kept exactly as you had it) --- */
 .navbar {
   background: white;
   border-bottom: 1px solid #e2e8f0;
@@ -48,7 +47,6 @@ body {
   transition: all 0.2s;
 }
 
-/* Fix: Targets the link inside the active list item */
 .nav-menu li.active a,
 .nav-menu li a:hover {
   background: #2563eb;
@@ -82,13 +80,11 @@ body {
   background: #fef2f2;
 }
 
-/* --- MAIN LAYOUT --- */
 .main { padding: 40px; max-width: 1200px; margin: 0 auto; }
 
 .page-header h1 { font-size: 28px; margin-bottom: 8px; }
 .page-header p { color: #64748b; }
 
-/* --- CONTROLS (Search & Filter) --- */
 .controls {
   display: flex;
   gap: 16px;
@@ -123,14 +119,12 @@ body {
   cursor: pointer;
 }
 
-/* --- REPORT CARD STYLES (Matched to JS) --- */
 .report-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* The card container created by JS */
 .report-card {
   background: white;
   padding: 20px;
@@ -150,7 +144,6 @@ body {
   border-color: #cbd5e1;
 }
 
-/* Left side of card */
 .card-left {
   display: flex;
   align-items: center;
@@ -180,7 +173,6 @@ body {
   color: #94a3b8;
 }
 
-/* Right side of card */
 .card-right {
   display: flex;
   align-items: center;
@@ -188,7 +180,6 @@ body {
   text-align: right;
 }
 
-/* Status Badge (Analyzed vs Pending) */
 .status-badge {
   padding: 6px 12px;
   border-radius: 20px;
@@ -200,7 +191,6 @@ body {
 .status-badge.done { background: #dcfce7; color: #166534; }
 .status-badge.pending { background: #fef9c3; color: #854d0e; }
 
-/* Care Score Display */
 .care-score {
   font-size: 20px;
   font-weight: 800;
@@ -218,13 +208,11 @@ body {
   text-transform: uppercase;
 }
 
-/* Score Colors */
-.score-good { color: #10b981; }    /* Green */
-.score-neutral { color: #f59e0b; } /* Orange */
-.score-bad { color: #ef4444; }     /* Red */
+.score-good { color: #10b981; }    
+.score-neutral { color: #f59e0b; } 
+.score-bad { color: #ef4444; }     
 
 
-/* --- LOADING & EMPTY STATES --- */
 .loading, .error, .empty-state {
   text-align: center;
   padding: 40px;
@@ -236,7 +224,6 @@ body {
 
 .error { color: #ef4444; background: #fef2f2; }
 
-/* --- PAGINATION --- */
 .pagination {
   display: flex;
   justify-content: center;
@@ -258,7 +245,6 @@ body {
   background: #f1f5f9;
 }
 
-/* RESPONSIVE */
 @media (max-width: 600px) {
   .report-card {
     flex-direction: column;
@@ -275,5 +261,5 @@ body {
     padding: 16px;
   }
   
-  .nav-menu { display: none; } /* Mobile menu would need extra JS */
+  .nav-menu { display: none; } 
 }
