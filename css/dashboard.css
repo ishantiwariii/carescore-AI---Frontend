@@ -56,11 +56,14 @@ body {
   font-weight: 500;
 }
 
-.nav-menu li a:hover,
-.nav-menu li a.active {
+
+/* Fix: Targets the link inside the active list item */
+.nav-menu li.active a,
+.nav-menu li a:hover {
   background: #2563eb;
   color: white;
 }
+
 
 
 .logout {
