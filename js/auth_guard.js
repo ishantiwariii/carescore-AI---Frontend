@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "login.html",
     "register.html",
     "about.html",
+    "verify.html",
   ];
 
   // 🔐 SINGLE SOURCE OF TRUTH = SUPABASE
