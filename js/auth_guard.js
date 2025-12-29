@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const PUBLIC_PAGES = [
     "",
-    "landing.html",
+    "index.html",
     "login.html",
     "register.html",
     "about.html",
@@ -19,15 +19,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 1️⃣ logged in + public page → dashboard
   if (
     data.session &&
-    ["login.html", "register.html", "landing.html"].includes(currentPage)
+    ["login.html", "register.html", "index.html"].includes(currentPage)
   ) {
-    window.location.href = "index.html";
+    window.location.href = "dashboard.html";
     return;
   }
 
   // ❌ Not logged in & trying to access protected page
   if (!data.session && !PUBLIC_PAGES.includes(currentPage)) {
-    window.location.href = "landing.html";
+    window.location.href = "index.html";
     return;
   }
 
@@ -69,7 +69,7 @@ function setupNavbar(user) {
     logoutBtn.onclick = async () => {
       await supabase.auth.signOut();
       localStorage.clear();
-      window.location.href = "landing.html";
+      window.location.href = "index.html";
     };
   }
 }

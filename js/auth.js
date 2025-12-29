@@ -228,7 +228,7 @@ async function handleLoginResponse(response, data, msgBox) {
   showMessage(msgBox, "Login Successful! Redirecting...", false);
 
   setTimeout(() => {
-    window.location.href = "index.html";
+    window.location.href = "dashboard.html";
   }, 800);
 }
 
