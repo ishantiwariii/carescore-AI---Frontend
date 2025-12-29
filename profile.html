@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Profile | CareScore AI</title>
+    <link rel="stylesheet" href="css/profile.css" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="brand">CareScore<span>AI</span></div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="history.html">All Reports</a></li>
+          <li><a href="imp.html">Important Reports</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="active"><a href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <span id="navUsername" class="nav-username"></span>
+        <a href="login.html" id="loginBtn">Login</a>
+        <button id="logoutBtn" class="logout">Logout</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="profile-card">
+        <h1>Your Profile</h1>
+
+        <div class="profile-field">
+          <label>Email</label>
+          <span id="profileEmail">—</span>
+        </div>
+
+        <div class="profile-field">
+          <label>Username</label>
+          <span id="profileUsername">—</span>
+        </div>
+
+        <div class="profile-field">
+          <label>User ID</label>
+          <span id="profileUserId">—</span>
+        </div>
+
+        <div class="profile-field">
+          <label>Account Created</label>
+          <span id="profileCreated">—</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth_guard.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>
