@@ -12,9 +12,9 @@
       <div class="nav-left">
         <div class="brand">CareScore<span>AI</span></div>
         <ul class="nav-menu">
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="history.html">All Reports</a></li>
-            <li><a href="about.html">About</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="history.html">All Reports</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </div>
       <div class="step-indicator">Step 2: Verify Data</div>
@@ -24,38 +24,47 @@
       <div class="intro">
         <h1>Review Extracted Data</h1>
         <p>
-          Our AI extracted the following values. Please <strong>edit</strong> any mistakes 
-          or <strong>add</strong> missing tests before we calculate your score.
+          The data below was extracted from your report image. Please
+          <strong>edit anything incorrect</strong> or
+          <strong>add missing values</strong> before analysis.
         </p>
       </div>
 
       <div class="editor-card">
         <div class="table-header">
-            <span>Test Name (Biomarker)</span>
-            <span>Value</span>
-            <span>Action</span>
+          <span>Field / Test</span>
+          <span>Value</span>
+          <span>Unit</span>
+          <span>Reference</span>
+          <span>Action</span>
         </div>
 
         <div id="fieldsContainer">
-            <div class="loading-spinner">Loading extracted data...</div>
+          <div class="loading-spinner">Loading extracted data...</div>
         </div>
 
         <button id="addRowBtn" class="btn-secondary">+ Add Another Test</button>
       </div>
 
-      <div id="statusMessage" class="status-message" style="display: none;"></div>
+      <div
+        id="statusMessage"
+        class="status-message"
+        style="display: none"
+      ></div>
 
       <div class="action-bar">
         <button id="cancelBtn" class="btn-text">Cancel & Delete</button>
-        <button id="confirmBtn" class="btn-primary">Confirm & Analyze ➝</button>
+        <button id="confirmBtn" class="btn-primary">Confirm & Analyze →</button>
       </div>
     </main>
 
-    <div id="processingOverlay" class="loading-overlay" style="display: none;">
-        <div class="spinner"></div>
-        <h3>Calculating CareScore...</h3>
-        <p>Comparing your values against medical standards.</p>
+    <div id="processingOverlay" class="loading-overlay" style="display: none">
+      <div class="spinner"></div>
+      <h3>Calculating CareScore...</h3>
+      <p>Comparing your values against medical standards.</p>
     </div>
+
+    <!-- SCRIPTS -->
     <script src="js/auth_guard.js"></script>
     <script src="js/confirm.js"></script>
   </body>
