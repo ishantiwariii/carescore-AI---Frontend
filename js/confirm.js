@@ -1,22 +1,12 @@
 const API_BASE_URL = "https://carescore-ai-backend.onrender.com/api";
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (!checkAuth()) return;
   loadReportData();
   setupEventListeners();
 });
 
-function checkAuth() {
-  if (!localStorage.getItem("careScoreToken")) {
-    window.location.href = "login.html";
-    return false;
-  }
-  return true;
-}
-
 function getReportId() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("id");
+  return new URLSearchParams(window.location.search).get("id");
 }
 
 function showError(msg) {
@@ -30,7 +20,7 @@ async function loadReportData() {
   const container = document.getElementById("fieldsContainer");
 
   if (!reportId) {
-    window.location.href = "dashboard.html";
+    showError("Invalid report.");
     return;
   }
 
@@ -38,36 +28,40 @@ async function loadReportData() {
     const res = await fetch(`${API_BASE_URL}/history/${reportId}`);
     const result = await res.json();
 
-    if (!result.success) {
-      showError("Failed to load report data.");
+    if (result.success === false && result.error === "QUOTA_EXHAUSTED") {
+      showError(
+        "AI quota exhausted. Extracted data unavailable. Please re-upload later."
+      );
       return;
     }
 
-    const raw = result.data.raw_data || {};
+    if (!result.success || !result.data?.raw_data) {
+      showError("No extracted data available.");
+      return;
+    }
+
+    const raw = result.data.raw_data;
     container.innerHTML = "";
 
     if (raw.lab) {
       addSectionHeader("Lab Information");
-      Object.entries(raw.lab).forEach(([k, v]) => {
-        addKeyValueRow(`lab.${k}`, v);
-      });
+      Object.entries(raw.lab).forEach(([k, v]) =>
+        addKeyValueRow(`lab.${k}`, v)
+      );
     }
 
     if (raw.patient) {
       addSectionHeader("Patient Information");
-      Object.entries(raw.patient).forEach(([k, v]) => {
-        addKeyValueRow(`patient.${k}`, v);
-      });
+      Object.entries(raw.patient).forEach(([k, v]) =>
+        addKeyValueRow(`patient.${k}`, v)
+      );
     }
 
-    if (Array.isArray(raw.tests)) {
+    if (Array.isArray(raw.tests) && raw.tests.length > 0) {
       addSectionHeader("Test Results");
-      raw.tests.forEach((test) => addTestRow(test));
-    }
-
-    if (!raw.lab && !raw.patient && !raw.tests) {
-      addSectionHeader("Extracted Data");
-      addKeyValueRow("", "");
+      raw.tests.forEach(addTestRow);
+    } else {
+      showError("No test data extracted.");
     }
   } catch (err) {
     console.error(err);
@@ -76,58 +70,42 @@ async function loadReportData() {
 }
 
 function addSectionHeader(title) {
-  const container = document.getElementById("fieldsContainer");
   const h = document.createElement("h3");
   h.className = "section-header";
   h.textContent = title;
-  container.appendChild(h);
+  document.getElementById("fieldsContainer").appendChild(h);
 }
 
 function addKeyValueRow(key = "", value = "") {
-  const container = document.getElementById("fieldsContainer");
   const div = document.createElement("div");
   div.className = "data-row";
-
   div.innerHTML = `
-    <input class="input-name" value="${key}" placeholder="field name">
-    <input class="input-value" value="${value}" placeholder="value">
+    <input class="input-name" value="${key}">
+    <input class="input-value" value="${value}">
     <button class="delete-btn">×</button>
   `;
-
   div.querySelector(".delete-btn").onclick = () => div.remove();
-  container.appendChild(div);
+  document.getElementById("fieldsContainer").appendChild(div);
 }
 
 function addTestRow(test = {}) {
-  const container = document.getElementById("fieldsContainer");
   const div = document.createElement("div");
   div.className = "data-row test-row";
-
   div.innerHTML = `
-    <input class="input-name" value="${
-      test.test_name || ""
-    }" placeholder="Test name">
-    <input class="input-value" value="${test.value || ""}" placeholder="Value">
-    <input class="input-unit" value="${test.unit || ""}" placeholder="Unit">
-    <input class="input-range" value="${
-      test.reference_range || ""
-    }" placeholder="Reference range">
+    <input class="input-name" value="${test.test_name || ""}">
+    <input class="input-value" value="${test.value || ""}">
+    <input class="input-unit" value="${test.unit || ""}">
+    <input class="input-range" value="${test.reference_range || ""}">
     <button class="delete-btn">×</button>
   `;
-
   div.querySelector(".delete-btn").onclick = () => div.remove();
-  container.appendChild(div);
+  document.getElementById("fieldsContainer").appendChild(div);
 }
 
 function setupEventListeners() {
-  document.getElementById("addRowBtn").addEventListener("click", () => {
-    addTestRow();
-  });
-
   document
     .getElementById("confirmBtn")
     .addEventListener("click", handleConfirm);
-
   document.getElementById("cancelBtn").addEventListener("click", () => {
     if (confirm("Discard this report?")) {
       window.location.href = "dashboard.html";
@@ -139,12 +117,7 @@ async function handleConfirm() {
   const reportId = getReportId();
   const rows = document.querySelectorAll(".data-row");
 
-  const confirmedData = {
-    lab: {},
-    patient: {},
-    tests: [],
-  };
-
+  const confirmedData = { lab: {}, patient: {}, tests: [] };
   let hasError = false;
 
   rows.forEach((row) => {
@@ -166,27 +139,11 @@ async function handleConfirm() {
         unit,
         reference_range: range,
       });
-    } else {
-      const key = row.querySelector(".input-name").value.trim();
-      const value = row.querySelector(".input-value").value.trim();
-
-      if (!key || !value) return;
-
-      if (key.startsWith("lab.")) {
-        confirmedData.lab[key.replace("lab.", "")] = value;
-      } else if (key.startsWith("patient.")) {
-        confirmedData.patient[key.replace("patient.", "")] = value;
-      }
     }
   });
 
-  if (hasError) {
-    showError("Please complete or delete invalid rows.");
-    return;
-  }
-
-  if (confirmedData.tests.length === 0) {
-    showError("Please add at least one test result.");
+  if (hasError || confirmedData.tests.length === 0) {
+    showError("Please fix or add test data.");
     return;
   }
 
@@ -204,12 +161,19 @@ async function handleConfirm() {
 
     const result = await res.json();
 
-    if (result.success) {
-      window.location.href = `analysis.html?id=${reportId}`;
-    } else {
+    if (result.success === false && result.error === "QUOTA_EXHAUSTED") {
+      showError("AI quota exhausted. Analysis cannot continue.");
+      document.getElementById("processingOverlay").style.display = "none";
+      return;
+    }
+
+    if (!result.success) {
       showError(result.error || "Analysis failed.");
       document.getElementById("processingOverlay").style.display = "none";
+      return;
     }
+
+    window.location.href = `analysis.html?id=${reportId}`;
   } catch (err) {
     console.error(err);
     showError("Server error during analysis.");
