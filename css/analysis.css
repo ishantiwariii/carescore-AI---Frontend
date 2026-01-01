@@ -280,3 +280,69 @@ body {
     display: none;
   }
 }
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.results-table thead {
+  background: #f8fafc;
+}
+
+.results-table th {
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.results-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #0f172a;
+}
+
+.results-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.results-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table td b {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.results-table .muted {
+  color: #94a3b8;
+  text-align: center;
+  font-style: italic;
+}
+
+.graph-card {
+  overflow: hidden;
+}
+
+#healthChart {
+  width: 100%;
+  min-height: 300px;
+}
+
+.card.list-card {
+  padding-top: 20px;
+}
+
+.card.list-card h3 {
+  margin-bottom: 12px;
+}
