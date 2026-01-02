@@ -1,8 +1,16 @@
 const API_BASE_URL = "https://carescore-ai-backend.onrender.com/api";
 
 document.addEventListener("DOMContentLoaded", () => {
+  checkAuth(); //
   setupEventListeners();
 });
+
+function checkAuth() {
+  const userId = localStorage.getItem("user_id");
+  if (!userId) {
+    window.location.href = "login.html";
+  }
+}
 
 function setupEventListeners() {
   const fileInput = document.getElementById("fileInput");
@@ -22,6 +30,14 @@ function setupEventListeners() {
   });
 
   fileInput.addEventListener("change", handleFileUpload);
+
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.clear();
+      window.location.href = "login.html";
+    });
+  }
 }
 
 async function handleFileUpload(event) {
@@ -45,12 +61,22 @@ async function handleFileUpload(event) {
     return;
   }
 
+  const userId = localStorage.getItem("user_id");
+
+  if (!userId) {
+    showStatus("Session expired. Please log in again.", true);
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1000);
+    return;
+  }
+
   const loadingOverlay = document.getElementById("loadingOverlay");
   loadingOverlay.style.display = "flex";
 
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("user_id", localStorage.getItem("user_id"));
+  formData.append("user_id", userId);
 
   try {
     const res = await fetch(`${API_BASE_URL}/report/upload`, {
