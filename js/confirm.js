@@ -1,9 +1,17 @@
 const API_BASE_URL = "https://carescore-ai-backend.onrender.com/api";
 
 document.addEventListener("DOMContentLoaded", () => {
+  checkAuth();
   loadReportData();
   setupEventListeners();
 });
+
+function checkAuth() {
+  const userId = localStorage.getItem("user_id");
+  if (!userId) {
+    window.location.href = "login.html";
+  }
+}
 
 function getReportId() {
   return new URLSearchParams(window.location.search).get("id");
@@ -27,13 +35,6 @@ async function loadReportData() {
   try {
     const res = await fetch(`${API_BASE_URL}/history/${reportId}`);
     const result = await res.json();
-
-    if (result.success === false && result.error === "QUOTA_EXHAUSTED") {
-      showError(
-        "AI quota exhausted. Extracted data unavailable. Please re-upload later."
-      );
-      return;
-    }
 
     if (!result.success || !result.data?.raw_data) {
       showError("No extracted data available.");
@@ -106,28 +107,58 @@ function setupEventListeners() {
   document
     .getElementById("confirmBtn")
     .addEventListener("click", handleConfirm);
+
   document.getElementById("cancelBtn").addEventListener("click", () => {
     if (confirm("Discard this report?")) {
       window.location.href = "dashboard.html";
     }
   });
+
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.clear();
+      window.location.href = "login.html";
+    });
+  }
 }
 
 async function handleConfirm() {
   const reportId = getReportId();
-  const rows = document.querySelectorAll(".data-row");
+  const userId = localStorage.getItem("user_id");
 
+  if (!reportId) {
+    showError("Invalid report ID.");
+    return;
+  }
+
+  if (!userId) {
+    showError("Session expired. Please log in again.");
+    setTimeout(() => (window.location.href = "login.html"), 1000);
+    return;
+  }
+
+  const rows = document.querySelectorAll(".data-row");
   const confirmedData = { lab: {}, patient: {}, tests: [] };
   let hasError = false;
 
   rows.forEach((row) => {
-    if (row.classList.contains("test-row")) {
-      const name = row.querySelector(".input-name").value.trim();
-      const value = row.querySelector(".input-value").value.trim();
-      const unit = row.querySelector(".input-unit").value.trim();
-      const range = row.querySelector(".input-range").value.trim();
+    const nameInput = row.querySelector(".input-name");
+    const valueInput = row.querySelector(".input-value");
 
-      if (!name || !value) {
+    if (!nameInput || !valueInput) return;
+
+    const name = nameInput.value.trim();
+    const value = valueInput.value.trim();
+
+    if (!name || !value) return;
+
+    if (row.classList.contains("test-row")) {
+      const unit = row.querySelector(".input-unit").value.trim();
+      const range = row.querySelector(".input-range").value.trim() || null;
+
+      const numericValue = parseFloat(value);
+      if (isNaN(numericValue)) {
         hasError = true;
         row.style.border = "1px solid red";
         return;
@@ -135,15 +166,25 @@ async function handleConfirm() {
 
       confirmedData.tests.push({
         test_name: name.toLowerCase().replace(/\s+/g, "_"),
-        value,
+        value: numericValue,
         unit,
         reference_range: range,
       });
+      return;
+    }
+
+    if (name.startsWith("patient.")) {
+      confirmedData.patient[name.replace("patient.", "")] = value;
+      return;
+    }
+
+    if (name.startsWith("lab.")) {
+      confirmedData.lab[name.replace("lab.", "")] = value;
     }
   });
 
   if (hasError || confirmedData.tests.length === 0) {
-    showError("Please fix or add test data.");
+    showError("Please fix highlighted fields before continuing.");
     return;
   }
 
@@ -162,13 +203,15 @@ async function handleConfirm() {
     const result = await res.json();
 
     if (result.success === false && result.error === "QUOTA_EXHAUSTED") {
-      showError("AI quota exhausted. Analysis cannot continue.");
+      showError(
+        "AI quota exhausted. Analysis cannot continue right now. Please try again later."
+      );
       document.getElementById("processingOverlay").style.display = "none";
       return;
     }
 
     if (!result.success) {
-      showError(result.error || "Analysis failed.");
+      showError(result.message || result.error || "Analysis failed.");
       document.getElementById("processingOverlay").style.display = "none";
       return;
     }
