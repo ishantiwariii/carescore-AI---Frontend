@@ -135,7 +135,7 @@ function renderPlotlyChart(tests) {
 
   tests.forEach((t) => {
     const v = parseFloat(t.value);
-    if (!isNaN(v)) {
+    if (!isNaN(v) && v > 0) { // log scale requires > 0
       labels.push(t.test_name.replace(/_/g, " ").toUpperCase());
       values.push(v);
     }
@@ -150,16 +150,22 @@ function renderPlotlyChart(tests) {
         x: labels,
         y: values,
         type: "bar",
+        hovertemplate: "%{x}<br>Value: %{y}<extra></extra>",
       },
     ],
     {
       margin: { t: 20 },
-      yaxis: { title: "Value" },
+      yaxis: {
+        title: "Value (log scale)",
+        type: "log",
+        autorange: true,
+      },
       xaxis: { tickangle: -35 },
     },
     { displayModeBar: false, responsive: true }
   );
 }
+
 
 function renderResultsTable(tests) {
   const tbody = document.getElementById("resultsTableBody");
